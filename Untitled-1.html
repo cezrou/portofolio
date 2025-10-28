@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <meta name="theme-color" content="#0b0b10" />
+  <title>Portfolio — UX / UI et chef de projet en Conception de projet numerique</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b10;
+      --panel:#12121a;
+      --panel-2:#161622;
+      --txt:#e7e7ee;
+      --muted:#a6a6b3;
+      --brand:#7c5cff;
+      --brand-2:#00e7d3;
+      --accent:#ff6b6b;
+      --glass:rgba(255,255,255,.06);
+      --border:rgba(255,255,255,.12);
+      --shadow:0 20px 50px rgba(0,0,0,.45), inset 0 0 0 1px var(--border);
+      --radius:18px;
+      --radius-sm:12px;
+      --radius-lg:28px;
+      --space:clamp(16px,2.5vw,28px);
+      --space-lg:clamp(28px,5vw,72px);
+      --h1:clamp(48px,8vw,116px);
+      --h2:clamp(28px,4vw,54px);
+      --h3:clamp(20px,2.4vw,28px);
+    }
+    *{box-sizing:border-box}
+    html,body{background:var(--bg);color:var(--txt);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;margin:0}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+    .container{width:min(1200px,92vw);margin-inline:auto}
+    .blur-bg{
+      position:fixed;inset:-20vmax;z-index:-2;
+      background:
+        radial-gradient(40vmax 40vmax at 10% 10%,rgba(124,92,255,.15),transparent 60%),
+        radial-gradient(45vmax 45vmax at 90% 10%,rgba(0,231,211,.12),transparent 60%),
+        radial-gradient(40vmax 40vmax at 50% 90%,rgba(255,107,107,.10),transparent 60%);
+      filter:saturate(140%) blur(40px);
+    }
+    header{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter: blur(10px);
+      background:linear-gradient(to bottom, rgba(11,11,16,.9), rgba(11,11,16,.55) 60%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex;align-items:center;justify-content:space-between;
+      padding:14px 0;
+    }
+    .brand{
+      display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px
+    }
+    .logo{
+      width:38px;height:38px;border-radius:12px;
+      background:
+        conic-gradient(from 210deg, var(--brand), var(--brand-2), var(--accent), var(--brand));
+      box-shadow:0 6px 18px rgba(124,92,255,.4), inset 0 0 12px rgba(255,255,255,.18);
+    }
+    .navlinks{display:flex;gap:18px;align-items:center}
+    .navlinks a{
+      padding:10px 14px;border-radius:10px;color:var(--muted);
+      transition:.25s ease;border:1px solid transparent
+    }
+    .navlinks a:hover{color:var(--txt);border-color:var(--border);background:rgba(255,255,255,.04)}
+    .cta{
+      background:linear-gradient(135deg,var(--brand) 0%, var(--brand-2) 100%);
+      color:#0c0c12;font-weight:700;padding:12px 18px;border-radius:12px;
+      box-shadow:0 12px 20px rgba(124,92,255,.35);transition:.25s;
+      border:0
+    }
+    .cta:hover{transform:translateY(-2px);filter:saturate(1.15)}
+    .hero{
+      padding:calc(var(--space-lg)*1.3) 0 var(--space-lg);
+      display:grid;grid-template-columns:1.25fr .75fr;gap:var(--space);
+      align-items:end
+    }
+    .hero h1{
+      font-family:"Playfair Display",serif;line-height:.92;margin:0;
+      letter-spacing:-.02em;font-size:var(--h1);
+      background:linear-gradient(180deg,#fff, #bdbde0);
+      -webkit-background-clip:text;background-clip:text;color:transparent
+    }
+    .tag{
+      display:inline-flex;gap:8px;align-items:center;
+      padding:8px 12px;border:1px solid var(--border);border-radius:999px;
+      color:var(--muted);backdrop-filter: blur(6px);background:rgba(255,255,255,.03)
+    }
+    .hero-sub{color:var(--muted);font-size:clamp(16px,1.4vw,18px);line-height:1.6;margin-top:14px}
+    .hero-calls{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+    .ghost{
+      padding:12px 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--txt)
+    }
+    .card{
+      background:var(--glass);border:1px solid var(--border);border-radius:var(--radius);
+      box-shadow:var(--shadow)
+    }
+    .hero-card{
+      padding:18px;display:grid;gap:14px;align-self:stretch
+    }
+    .hero-shot{
+      aspect-ratio:4/3;border-radius:14px;overflow:hidden;position:relative
+    }
+    .hero-shot img{width:100%;height:100%;object-fit:cover;transform:scale(1.02)}
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{
+      font-size:13px;color:var(--muted);padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.04)
+    }
+    section{padding:calc(var(--space-lg)*1.1) 0}
+    .section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
+    .section-head h2{font-size:var(--h2);margin:0}
+    .muted{color:var(--muted)}
+    .grid{display:grid;gap:var(--space)}
+    .projects{grid-template-columns:repeat(12,1fr)}
+    .project{
+      grid-column:span 6;display:grid;gap:12px;overflow:hidden;border-radius:var(--radius);position:relative
+    }
+    .project .thumb{position:relative;overflow:hidden;border-radius:16px}
+    .project .thumb::after{
+      content:"";position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.55), transparent 45%)
+    }
+    .project img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;aspect-ratio:16/10}
+    .project:hover img{transform:scale(1.06)}
+    .project .meta{
+      position:absolute;left:16px;right:16px;bottom:14px;display:flex;align-items:center;justify-content:space-between
+    }
+    .project .meta h3{margin:0;font-size:clamp(18px,1.8vw,22px)}
+    .pill{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.08);backdrop-filter: blur(6px);border:1px solid var(--border)}
+    .skills{grid-template-columns:repeat(6,1fr)}
+    .skill{padding:18px;border-radius:16px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.03));border:1px solid var(--border)}
+    .skill .row{display:flex;align-items:center;justify-content:space-between}
+    .meter{height:8px;background:rgba(255,255,255,.06);border-radius:999px;margin-top:12px;overflow:hidden}
+    .meter>span{display:block;height:100%;background:linear-gradient(90deg,var(--brand),var(--brand-2));border-radius:999px}
+    .process{grid-template-columns:repeat(4,1fr)}
+    .step{padding:20px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.04)}
+    .step-num{
+      width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-weight:800;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b0b10
+    }
+    .tgrid{grid-template-columns:repeat(3,1fr)}
+    .tcard{padding:22px;border-radius:16px;border:1px solid var(--border);background:rgba(255,255,255,.04)}
+    .avatar{width:46px;height:46px;border-radius:50%;overflow:hidden}
+    .contact{
+      display:grid;grid-template-columns:1fr .9fr;gap:var(--space)
+    }
+    form{display:grid;gap:14px}
+    input,textarea{
+      width:100%;padding:14px 16px;border-radius:12px;border:1px solid var(--border);
+      background:rgba(255,255,255,.04);color:var(--txt);outline:0;font:inherit
+    }
+    textarea{min-height:140px;resize:vertical}
+    footer{padding:40px 0;border-top:1px solid var(--border);color:var(--muted);text-align:center}
+    .marquee{
+      display:flex;overflow:hidden;gap:28px;border:1px solid var(--border);border-radius:999px;
+      padding:12px 14px;background:rgba(255,255,255,.03)
+    }
+    .marquee .track{
+      display:flex;gap:28px;min-width:max-content;animation:scroll 28s linear infinite
+    }
+    @keyframes scroll{to{transform:translateX(-50%)}}
+    .divider{height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);margin:var(--space) 0}
+    .kpis{display:flex;gap:20px;flex-wrap:wrap;margin-top:10px}
+    .kpi{padding:14px 16px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.04)}
+    @media (max-width:1024px){
+      .hero{grid-template-columns:1fr}
+      .projects .project{grid-column:span 12}
+      .skills{grid-template-columns:repeat(3,1fr)}
+      .process{grid-template-columns:repeat(2,1fr)}
+      .contact{grid-template-columns:1fr}
+      .tgrid{grid-template-columns:1fr}
+    }
+    @media (max-width:560px){
+      .navlinks{display:none}
+      .kpis{gap:12px}
+    }
+    .fade-up{opacity:0;transform:translateY(14px);animation:up .8s ease forwards}
+    @keyframes up{to{opacity:1;transform:none}}
+  </style>
+</head>
+<body>
+  <div class="blur-bg" aria-hidden="true"></div>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <div class="logo"></div>
+        <div>CODJO</div>
+      </div>
+      <nav class="navlinks">
+        <a href="#about">À propos</a>
+        <a href="#experiences">Expériences</a>
+        <a href="#projects">Projets</a>
+        <a href="#education">Formations</a>
+        <a href="#skills">Compétences</a>
+        <a href="#contact" class="pill">Contact</a>
+        <button class="cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Discuter d’un projet</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div class="fade-up" style="animation-delay:.05s">
+        <span class="tag">Disponible dès maintenant • Paris / Remote</span>
+        <h1>Designer UI/UX créant des expériences qui convertissent</h1>
+        <p class="hero-sub">J’aide les startups et marques ambitieuses à concevoir des produits clairs, désirables et performants. De la recherche à la livraison, je traduis les objectifs business en interfaces élégantes et efficaces.</p>
+        <div class="hero-calls">
+          <button class="cta" onclick="document.getElementById('work').scrollIntoView({behavior:'smooth'})">Voir mes projets</button>
+          <a class="ghost" href="#contact">Obtenir un devis</a>
+        </div>
+        <div class="kpis">
+          <div class="kpi">+80 projets livrés</div>
+          <div class="kpi">+120M sessions/an</div>
+          <div class="kpi">Jusqu’à +38% de conversion</div>
+        </div>
+      </div>
+      <div class="card hero-card fade-up" style="animation-delay:.15s">
+        <div class="hero-shot">
+          <img src="https://images.unsplash.com/photo-1557825835-70d97c4aa567?q=80&w=1800&auto=format&fit=crop" alt="Hero preview">
+        </div>
+        <div class="badges">
+          <span class="badge">Design systems</span>
+          <span class="badge">UX Research</span>
+          <span class="badge">Prototypage</span>
+          <span class="badge">A/B testing</span>
+          <span class="badge">Accessibilité</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="container marquee fade-up" style="animation-delay:.2s">
+      <div class="track">
+        <span>Figma</span><span>Adobe&nbsp;XD</span><span>Miro</span><span>Notion</span><span>Trello</span><span>Hotjar</span><span>Maze</span><span>Intercom</span><span>GA4</span><span>Webflow</span><span>Framer</span>
+        <span>Figma</span><span>Adobe&nbsp;XD</span><span>Miro</span><span>Notion</span><span>Trello</span><span>Hotjar</span><span>Maze</span><span>Intercom</span><span>GA4</span><span>Webflow</span><span>Framer</span>
+      </div>
+    </div>
+
+    <section id="about" class="container">
+      <div class="section-head">
+        <h2>À propos</h2>
+        <span class="muted">10+ ans d’expérience</span>
+      </div>
+      <div class="grid" style="grid-template-columns:1.2fr .8fr;gap:var(--space)">
+        <div class="card" style="padding:22px">
+          Étudiant en Master 2 Humanités Numériques, spécialisé en UX/UI Design et ergonomie des interfaces. Expérience en recherche utilisateur, wireframes, prototypage, conception et tests de solutions centrées sur l’utilisateur. Je recherche une mission pour contribuer à des expériences digitales innovantes (desktop & mobile) dans des environnements complexes et multiculturels.
+          <div class="divider"></div>
+          <div class="badges">
+            <span class="badge">Langues: Français (native), Anglais (courant)</span>
+            <span class="badge">Disponibilité: Stage / Mission</span>
+          </div>
+        </div>
+        <div class="card" style="padding:22px">
+          <strong>Disponibilité</strong><br>
+          Ouvert aux missions UX/UI, prototypage et gestion de projet digital
+          <div class="divider"></div>
+          <strong>Atouts</strong>
+          <div class="kpis">
+            <div class="kpi">Créativité & sens du détail</div>
+            <div class="kpi">Collaboration & communication</div>
+            <div class="kpi">Capacité d’analyse</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="container">
+      <div class="section-head">
+        <h2>Projets réalisés</h2>
+        <span class="muted">Sélection issue du CV</span>
+      </div>
+      <div class="grid projects">
+        <article class="project card fade-up" style="animation-delay:.05s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=1800&auto=format&fit=crop" alt="Réservation multi‑services">
+            <div class="meta">
+              <h3>Application de réservation multi‑services</h3>
+              <span class="pill">Wireframes • Prototypes • Tests</span>
+            </div>
+          </div>
+          <div style="padding:16px">
+            Conception UX (flows, maquettes, priorisation contenu) et tests pour une application de réservation (vTC, hôtels, taxis, restaurants).
+          </div>
+        </article>
+
+        <article class="project card fade-up" style="animation-delay:.1s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1557821552-17105176677c?q=80&w=1800&auto=format&fit=crop" alt="Plateforme inclusion culturelle">
+            <div class="meta">
+              <h3>Plateforme d’inclusion culturelle</h3>
+              <span class="pill">Personas • UI • Storytelling</span>
+            </div>
+          </div>
+          <div style="padding:16px">
+            Définition personas, parcours, interfaces adaptées aux publics éloignés. Mise en forme narrative pour l’engagement.
+          </div>
+        </article>
+
+        <article class="project card fade-up" style="animation-delay:.15s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1520975922161-505f2d4d98d3?q=80&w=1800&auto=format&fit=crop" alt="Application santé mentale">
+            <div class="meta">
+              <h3>Application de santé mentale</h3>
+              <span class="pill">Co‑conception • Prototypage</span>
+            </div>
+          </div>
+          <div style="padding:16px">
+            Co‑conception, prototypage et rédaction de messages pour accompagner des utilisateurs dans des parcours sensibles.
+          </div>
+        </article>
+
+        <article class="project card fade-up" style="animation-delay:.2s">
+          <div class="thumb">
+            <img src="https://images.unsplash.com/photo-1532619675605-1ede6c2b7a0a?q=80&w=1800&auto=format&fit=crop" alt="Universite Paris 8">
+            <div class="meta">
+              <h3>Gestion de projet — Université Paris 8</h3>
+              <span class="pill">Coordination • Documentation</span>
+            </div>
+          </div>
+          <div style="padding:16px">
+            Gestion et suivi de projets digitaux innovants, documentation et coordination d’équipe pédagogique.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="skills" class="container">
+      <div class="section-head">
+        <h2>Compétences</h2>
+        <span class="muted">UX/UI Design, Recherche, Gestion de projet</span>
+      </div>
+      <div class="grid skills">
+        <div class="skill">
+          <div class="row"><strong>UX Research</strong><span class="muted">Interviews, tests</span></div>
+          <div class="meter"><span style="width:92%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="row"><strong>Wireframing</strong><span class="muted">Flows, parcours</span></div>
+          <div class="meter"><span style="width:94%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="row"><strong>UI Design</strong><span class="muted">Maquettes</span></div>
+          <div class="meter"><span style="width:96%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="row"><strong>Méthodologies</strong><span class="muted">Agile, Design Thinking</span></div>
+          <div class="meter"><span style="width:90%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="row"><strong>Prototypage</strong><span class="muted">Figma, Framer</span></div>
+          <div class="meter"><span style="width:88%"></span></div>
+        </div>
+        <div class="skill">
+          <div class="row"><strong>Tech UI</strong><span class="muted">HTML, CSS, JS (notions)</span></div>
+          <div class="meter"><span style="width:91%"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiences" class="container">
+      <div class="section-head">
+        <h2>Expériences professionnelles</h2>
+        <span class="muted">Stages, missions et associative</span>
+      </div>
+      <div class="grid process">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Stagiaire UX & Content Designer — 289 Degrees</h3>
+          Conception UX de site web (wireframes, maquettes, parcours utilisateur). Analyses et recommandations pour améliorer l’expérience.
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>Assistant UX/UI & Digital Content — Glory Pharma</h3>
+          Contribution à la plateforme digitale de suivi des honoraires. Création de tableaux de bord et optimisation de l’onboarding.
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Expérience associative — APEV Poitiers</h3>
+          Animation d’ateliers et accompagnement personnalisé. Développement de supports et communication.
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
+          <h3>Chef de projet — Université Paris 8</h3>
+          Gestion et coordination de projets digitaux innovants, design de l’information.
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="container">
+      <div class="section-head">
+        <h2>Diplômes & Formations</h2>
+        <span class="muted">Humanités Numériques, UX/UI</span>
+      </div>
+      <div class="grid tgrid">
+        <div class="tcard">
+          <strong>Master 2 Humanités Numériques — Enjeux & Technologies</strong>
+          <div class="muted">Université Paris 8 • Depuis 2025</div>
+          <div class="divider"></div>
+          Prototypage, recherche utilisateur, design de l’information.
+        </div>
+        <div class="tcard">
+          <strong>Master 1 Humanités Numériques — Enjeux & Technologies</strong>
+          <div class="muted">Université Paris 8 • 2024</div>
+          <div class="divider"></div>
+          UX/UI, storytelling, ergonomie, projets digitaux innovants.
+        </div>
+        <div class="tcard">
+          <strong>Parcours complémentaires</strong>
+          <div class="muted">Certifications & ateliers</div>
+          <div class="divider"></div>
+          Gestion de projet avancé, expérience client, Google Analytics.
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="container contact">
+      <div class="card" style="padding:22px">
+        <h2 style="margin-top:0">Discutons de votre projet</h2>
+        Dites‑moi vos objectifs, vos délais et vos contraintes. Je reviens vers vous avec une proposition claire.
+        <div class="divider"></div>
+        <div class="badges">
+          <span class="badge">Réponse sous 24h</span>
+          <span class="badge">Forfait ou régie</span>
+          <span class="badge">Facturation simple</span>
+        </div>
+      </div>
+      <div class="card" style="padding:22px">
+        <form onsubmit="event.preventDefault(); alert('Merci ! Votre message a bien été envoyé.');">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+            <input required placeholder="Votre nom">
+            <input required type="email" placeholder="Email professionnel">
+          </div>
+          <input placeholder="Entreprise (optionnel)">
+          <textarea required placeholder="Décrivez brièvement votre besoin"></textarea>
+          <div style="display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap">
+            <div class="badges">
+              <span class="badge">Budget: 5k–50k€</span>
+              <span class="badge">Délai: 2–8 semaines</span>
+            </div>
+            <button class="cta" type="submit">Envoyer la demande</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; <span id="y"></span> CODJO — UX / UI et chef de projet en Conception de projet numerique. Portfolio propulsé avec amour.
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id);
+        if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'})}
+      })
+    });
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('seen') })
+    },{threshold:.2});
+    document.querySelectorAll('.fade-up').forEach(el=>io.observe(el));
+  </script>
+</body>
+</html>
